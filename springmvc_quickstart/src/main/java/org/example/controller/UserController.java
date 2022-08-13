@@ -12,6 +12,7 @@ import org.example.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user") // 一级访问目录
@@ -196,9 +198,6 @@ public class UserController {
     }
 
 
-
-
-
     @RequestMapping("/redirect")
     public String redirect(Model model) {
         // 底层使用的还是request.setAttribute("key","value") 域范围是一次请求，重定向时取不出model的值
@@ -206,6 +205,7 @@ public class UserController {
         model.addAttribute("username", "张飞");
         return "redirect:/index.jsp";
     }
+
     /**
      * \@sessionAttributes的效果
      */
@@ -248,5 +248,18 @@ public class UserController {
         // 设置视图名称，视图解析器解析modelAndView 拼接前缀和后缀
         modelAndView.setViewName("success");
         return modelAndView;
+    }
+
+
+    /**
+     * ajax异步交互
+     *
+     * @param userList
+     */
+    @RequestMapping("/ajaxRequest")
+    @ResponseBody
+    public List<User> ajaxRequest(@RequestBody List<User> userList) {
+        System.out.println("userList = " + userList);
+        return userList;
     }
 }
