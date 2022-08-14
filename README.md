@@ -1,6 +1,7 @@
 # Spring MVC
 
 # [SpringMVC进阶](SpringMVC进阶.md)
+# [SSM整合](SSM整合.md)
 
 * SpringMVC简介
 * SpringMVC组件概述
